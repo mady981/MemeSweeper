@@ -1,64 +1,74 @@
 #include "Vector.h"
 #include <cmath>
 
-Vector::Vector(float x_in, float y_in)
+Vec2f::Vec2f(float x_in, float y_in)
 	:
 	x( x_in ),
 	y( y_in )
 {
 }
 
-Vector Vector::operator+(const Vector& rhs) const
+Vec2f Vec2f::operator+(const Vec2f& rhs) const
 {
-	return Vector( x + rhs.x , y + rhs.y );
+	return Vec2f( x + rhs.x , y + rhs.y );
 }
 
-Vector& Vector::operator+=(const Vector& rhs)
+Vec2f& Vec2f::operator+=(const Vec2f& rhs)
 {
 	return *this = *this + rhs;
 }
 
-Vector Vector::operator-( const Vector& rhs ) const
+Vec2f Vec2f::operator-( const Vec2f& rhs ) const
 {
-	return Vector( x - rhs.x,y - rhs.y );
+	return Vec2f( x - rhs.x,y - rhs.y );
 }
 
-Vector& Vector::operator-=( const Vector& rhs )
+Vec2f& Vec2f::operator-=( const Vec2f& rhs )
 {
 	return *this = *this - rhs;
 }
 
-Vector Vector::operator*(float rhs) const
+Vec2f Vec2f::operator*(float rhs) const
 {
-	return Vector( x * rhs , y * rhs );
+	return Vec2f( x * rhs , y * rhs );
 }
 
-Vector& Vector::operator*=(float rhs)
+Vec2f& Vec2f::operator*=(float rhs)
 {
 	return *this = *this * rhs;
 }
 
-bool Vector::operator==( const Vector& rhs ) const
+Vec2f Vec2f::operator/( float rhs ) const
+{
+	return Vec2f( x / rhs,y / rhs );
+}
+
+Vec2f& Vec2f::operator/=( float rhs )
+{
+	return *this = *this / rhs;
+}
+
+bool Vec2f::operator==( const Vec2f& rhs ) const
 {
 	return x == rhs.x && y == rhs.y;
 }
 
-float Vector::getLength() const
+float Vec2f::getLength() const
 {
 	return std::sqrt( getLengthSq() );
 }
 
-float Vector::getLengthSq() const
+float Vec2f::getLengthSq() const
 {
 	return x * x + y * y;
 }
 
-Vector& Vector::Nomalize()
+Vec2f& Vec2f::Nomalize()
 {
 	return *this = getNomalize();
 }
 
-Vector Vector::getNomalize() const
+Vec2f Vec2f::getNomalize() const
 {
 	const float len = getLengthSq();
 	if ( len != 0.0f )
@@ -68,3 +78,81 @@ Vector Vector::getNomalize() const
 	return *this;
 }
 
+//-------------------------------------------------//
+
+Vec2i::Vec2i( int x_in,int y_in )
+	:
+	x( x_in ),
+	y( y_in )
+{
+}
+
+Vec2i Vec2i::operator+( const Vec2i& rhs ) const
+{
+	return Vec2i( x + rhs.x,y + rhs.y );
+}
+
+Vec2i& Vec2i::operator+=( const Vec2i& rhs )
+{
+	return *this = *this + rhs;
+}
+
+Vec2i Vec2i::operator-( const Vec2i& rhs ) const
+{
+	return Vec2i( x - rhs.x,y - rhs.y );
+}
+
+Vec2i& Vec2i::operator-=( const Vec2i& rhs )
+{
+	return *this = *this - rhs;
+}
+
+Vec2i Vec2i::operator*( int rhs ) const
+{
+	return Vec2i( x + rhs,y + rhs );
+}
+
+Vec2i& Vec2i::operator*=( int rhs )
+{
+	return *this = *this * rhs;
+}
+
+Vec2i Vec2i::operator/( int rhs ) const
+{
+	return Vec2i( x / rhs,y / rhs );
+}
+
+Vec2i& Vec2i::operator/=( int rhs )
+{
+	return *this = *this / rhs;
+}
+
+bool Vec2i::operator==( const Vec2i& rhs ) const
+{
+	return x == rhs.x && y == rhs.y;
+}
+
+float Vec2i::getLength() const
+{
+	return float( std::sqrt( getLengthSq() ) );
+}
+
+float Vec2i::getLengthSq() const
+{
+	return float( x * x + y * y );
+}
+
+Vec2i& Vec2i::Nomalize()
+{
+	return *this = getNomalize();
+}
+
+Vec2i Vec2i::getNomalize() const
+{
+	const int len = int( getLengthSq() );
+	if ( len != 0 )
+	{
+		return *this * ( 1 / len );
+	}
+	return *this;
+}
