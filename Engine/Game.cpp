@@ -24,7 +24,9 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+    rng ( std::random_device()() ),
+    mf( rng )
 {
 }
 
@@ -38,8 +40,21 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+    if ( !mf.getWon() && !mf.getFucked() )
+    {
+        const Mouse::Event c = wnd.mouse.Read();
+        if ( c.GetPosX() >= mf.getgridpos().x
+            && c.GetPosX() < mf.getwidth() * SpriteCodex::tileSize + mf.getgridpos().x
+            && c.GetPosY() >= mf.getgridpos().x
+            && c.GetPosY() < mf.getheight() * SpriteCodex::tileSize + mf.getgridpos().y )
+        {
+            mf.onTileClicked( Vec2i( c.GetPosX(),c.GetPosY() ),c.GetType() );
+        }
+        mf.WinCheck();
+    }
 }
 
 void Game::ComposeFrame()
 {
+    mf.Draw( sc,gfx );
 }

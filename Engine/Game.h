@@ -23,6 +23,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "SpriteCodex.h"
+#include "MemeField.h"
 
 class Game
 {
@@ -34,13 +36,10 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	/********************************/
-	/*  User Functions              */
-	/********************************/
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-	/********************************/
-	/*  User Variables              */
-	/********************************/
+    std::mt19937 rng;
+    SpriteCodex sc;
+    MemeField mf;
 };

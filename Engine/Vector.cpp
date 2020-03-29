@@ -109,7 +109,7 @@ Vec2i& Vec2i::operator-=( const Vec2i& rhs )
 
 Vec2i Vec2i::operator*( int rhs ) const
 {
-	return Vec2i( x + rhs,y + rhs );
+	return Vec2i( x * rhs,y * rhs );
 }
 
 Vec2i& Vec2i::operator*=( int rhs )
